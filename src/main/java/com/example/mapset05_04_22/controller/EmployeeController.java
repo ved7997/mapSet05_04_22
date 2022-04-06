@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -32,6 +34,12 @@ public class EmployeeController {
     public Employee find(@RequestParam String firstName, @RequestParam String lastName) {
         return employeeService.find(firstName, lastName);
     }
+    @GetMapping("/all")
+    public Collection<Employee> all() {
+        return employeeService.getAll();
+    }
+
+
 
     private String generateMesage(Employee employee, String status) {
         return  String.format("Сотрудник %s %s %s.",

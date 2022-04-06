@@ -1,15 +1,17 @@
 package com.example.mapset05_04_22.service;
 
-public interface EmployeeService {
+import java.util.Collection;
 
-    Employee add(String firstName, String lastName);
-    Employee add(Employee employee);
-    Employee remove(String firstName, String lastName);
-    Employee remove(Employee employee);
-    Employee find(String firstName, String lastName);
+public abstract class EmployeeService {
 
 
+    public abstract Employee add(String firstName, String lastName);
+    public abstract Employee add(Employee employee);
+    public abstract Employee remove(String firstName, String lastName);
+    public abstract Employee remove(Employee employee);
+    public abstract Employee find(String firstName, String lastName);
 
-
+    public abstract Collection<Employee> getAll();
 
 }
+
