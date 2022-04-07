@@ -6,16 +6,14 @@ import com.example.mapset05_04_22.service.Employee;
 import com.example.mapset05_04_22.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Service
-public class EmployeeServiceImpl extends EmployeeService {
-    private final Set<Employee> employees;
+public class EmployeeServiceImpl implements EmployeeService {
+    private final List<Employee> employeesList;
 
     public EmployeeServiceImpl() {
-        employees = new HashSet<>();
+        employeesList = new ArrayList<>();
     }
 
 
@@ -27,9 +25,10 @@ public class EmployeeServiceImpl extends EmployeeService {
 
     @Override
     public Employee add(Employee employee) {
-        if (!employees.add(employee)) {
+        if (employeesList.contains(employee)) {
             throw new EmployeeExistsException();
         }
+        employeesList.add(employee);
         return employee;
     }
 
@@ -41,7 +40,7 @@ public class EmployeeServiceImpl extends EmployeeService {
 
     @Override
     public  Employee remove(Employee employee) {
-        if (!employees.remove(employee)) {
+        if (!employeesList.remove(employee)) {
             throw new EmployeeNotFoundException();
         }
         return employee;
@@ -50,7 +49,7 @@ public class EmployeeServiceImpl extends EmployeeService {
     @Override
     public  Employee find(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (!employees.contains(employee)) {
+        if (!employeesList.contains(employee)) {
             throw new EmployeeNotFoundException();
         }
 
@@ -60,7 +59,7 @@ public class EmployeeServiceImpl extends EmployeeService {
 
     @Override
     public Collection<Employee> getAll(){
-        return  Set.copyOf(employees);
+        return  Set.copyOf(employeesList);
     }
 
 }

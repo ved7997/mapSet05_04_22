@@ -20,7 +20,8 @@ public class EmployeeController {
     }
     @GetMapping("/add")
     public String add(@RequestParam String firstName, @RequestParam String lastName){
-        Employee result = employeeService.add(firstName, lastName);
+        Employee result;
+        result = employeeService.add(firstName, lastName);
         return generateMesage(result, "успешно создан");
     }
 
@@ -38,8 +39,6 @@ public class EmployeeController {
     public Collection<Employee> all() {
         return employeeService.getAll();
     }
-
-
 
     private String generateMesage(Employee employee, String status) {
         return  String.format("Сотрудник %s %s %s.",
